@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.itcast.ssm.mapper.ItemsMapperCustom">
+
+	<!-- 商品查询的sql片段 建议是以单表为单位定义查询条件 建议将常用的查询条件都写出来 -->
+	<sql id="query_items_where">
+		<if test="itemsCustom!=null">
+			<if test="itemsCustom.itemName!=null and itemsCustom.itemName!=''">
+				and name like '%${itemsCustom.itemName}%'
+			</if>
+			<if test="itemsCustom.itemId!=null">
+				and id = #{itemsCustom.itemId}
+			</if>
+		</if>
+	</sql>
+	<!-- 商品查询 parameterType：输入 查询条件 -->
+	<select id="findItemsList" parameterType="cn.itcast.ssm.po.ItemsQueryVo"
+		resultType="cn.itcast.ssm.po.ItemsCustom">
+		SELECT
+		items.item_name AS itemName,
+		items.item_id AS itemId,
+		items.item_price AS itemPrice,
+		items.item_detail AS itemDetail,
+		items.item_brand AS itemBrand,
+		items.item_create_time AS itemCreateTime
+		FROM
+		items
+		<where>
+			<include refid="query_items_where" />
+		</where>
+	</select>
+</mapper>
