@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt"  prefix="fmt"%>
+	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -10,36 +10,41 @@
 
 </head>
 <body>
-<form id="itemForm" action="${pageContext.request.contextPath }/items/editItemSubmit.action" method="post" >
-<input type="hidden" name="itemId " value="${item.itemId }"/>
-修改商品信息：
-<table width="100%" border=1>
-	<thead>
+	<form id="itemForm"
+		action="${pageContext.request.contextPath }/items/editItemSubmit.action"
+		method="post">
+		<input type="hidden" name="itemId " value="${item.itemId }" /> 修改商品信息：
+		<table width="100%" border=1>
+			<thead>
 				<tr class="text-c">
 					<th width="20">商品名称</th>
 					<th width="20">商品价格</th>
-				    <th width="20">商品brand</th>
+					<th width="20">商品brand</th>
 					<th width="150">项目名称</th>
-	                 <th width="60">商品简介</th>
-	                  <th width="60">操作</th>
-                </tr>
-    </thead>
-  <tbody id="tab">
-   <tr>
-	<td><input type="text" name="itemName" value="${item.itemName}"/></td>
-	<td><input type="text" name="itemPrice" value="${item.itemPrice}"/></td>
-	<td><input type="text" name="itemBrand" value="${item.itemBrand}"/></td>
-	<td><input type="text" name="itemCreateTime" value="<fmt:formatDate value="${item.itemCreateTime}" pattern="yyyy-MM-dd HH:mm:ss"/>"/></td>
-	<td><textarea rows="3" cols="30" name="itemDetail">${item.itemDetail}</textarea></td>
-	<td colspan="2" align="center"><input type="submit" value="修改"/></td>
-   </tr>
-</tbody>
+					<th width="60">商品简介</th>
+					<th width="60">操作</th>
+				</tr>
+			</thead>
+			<tbody id="tab">
+				<tr>
+					<td><input type="text" name="itemName"
+						value="${item.itemName}" /></td>
+					<td><input type="text" name="itemPrice"
+						value="${item.itemPrice}" /></td>
+					<td><input type="text" name="itemBrand"
+						value="${item.itemBrand}" /></td>
+					<td><input type="text" name="itemCreateTime"
+						value="<fmt:formatDate value="${item.itemCreateTime}" pattern="yyyy-MM-dd HH:mm:ss"/>" /></td>
+					<td><textarea rows="3" cols="30" name="itemDetail">${item.itemDetail}</textarea></td>
+					<td colspan="2" align="center"><input type="submit" value="修改" /></td>
+				</tr>
+			</tbody>
 
 
 
-</table>
+		</table>
 
-</form>
+	</form>
 </body>
 
 </html>

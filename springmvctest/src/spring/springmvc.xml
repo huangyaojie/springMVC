@@ -17,9 +17,7 @@
 	<context:component-scan base-package="cn.itcast.ssm.controller" />
 
 	<!-- 通过annotation-driven可以替代下边的处理器映射器和适配器 -->
-<!-- 	<mvc:annotation-driven conversion-service="conversionService">
-</mvc:annotation-driven>
-	-->
+	<!-- <mvc:annotation-driven conversion-service="conversionService"> </mvc:annotation-driven> -->
 
 	<!-- 注解处理器映射器 -->
 	<bean
@@ -44,32 +42,18 @@
 
 
 	<!-- 自定义webBinder -->
-<!-- 	<bean id="customBinder"
-		class="org.springframework.web.bind.support.ConfigurableWebBindingInitializer">
-		使用converter进行参数转
-		<property name="conversionService" ref="conversionService" />
-
-		propertyEditorRegistrars用于属性编辑器
-		<property name="propertyEditorRegistrars">
-			<list>
-				<ref bean="customPropertyEditor" />
-			</list>
-		</property>
-	</bean> -->
+	<!-- <bean id="customBinder" class="org.springframework.web.bind.support.ConfigurableWebBindingInitializer"> 
+		使用converter进行参数转 <property name="conversionService" ref="conversionService" 
+		/> propertyEditorRegistrars用于属性编辑器 <property name="propertyEditorRegistrars"> 
+		<list> <ref bean="customPropertyEditor" /> </list> </property> </bean> -->
 
 	<!-- 注册属性编辑器 -->
-	<!-- <bean id="customPropertyEditor" class="cn.itcast.ssm.controller.propertyeditor.CustomPropertyEditor"></bean>
-	 -->
+	<!-- <bean id="customPropertyEditor" class="cn.itcast.ssm.controller.propertyeditor.CustomPropertyEditor"></bean> -->
 	<!-- 转换器 -->
-<!--     <bean id="conversionService"
-		class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
-		<property name="converters">
-			<list>
-				<bean class="cn.itcast.ssm.controller.converter.CustomDateConverter"/>
-				<bean class="cn.itcast.ssm.controller.converter.StringTrimConverter"/>
-			</list>
-		</property>
-	</bean>  -->
+	<!-- <bean id="conversionService" class="org.springframework.format.support.FormattingConversionServiceFactoryBean"> 
+		<property name="converters"> <list> <bean class="cn.itcast.ssm.controller.converter.CustomDateConverter"/> 
+		<bean class="cn.itcast.ssm.controller.converter.StringTrimConverter"/> </list> 
+		</property> </bean> -->
 
 
 </beans>
