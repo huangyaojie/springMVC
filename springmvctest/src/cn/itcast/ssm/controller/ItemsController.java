@@ -8,6 +8,11 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -110,18 +115,27 @@ public class ItemsController {
 //	}
 
 	//商品修改提交
-
 //	itemsQueryVo是包装类型的pojo
 	@RequestMapping("/editItemSubmit")
-	public String editItemSubmit(Integer id,ItemsCustom itemsCustom,ItemsQueryVo itemsQueryVo)throws Exception{
-//	public String editItemSubmit(Integer id,ItemsCustom itemsCustom)throws Exception{
-
+	public String editItemSubmit(Model model,Integer id,@Validated @ModelAttribute(value="ItemsCustom")ItemsCustom itemsCustom,BindingResult bindingResult)throws Exception{
+    if(bindingResult.hasErrors()){
+	List<ObjectError> allErrors = bindingResult.getAllErrors();
+	model.addAttribute("errors",allErrors);
+	model.addAttribute("itemsCustom",itemsCustom);
+	return "editItem";
+   }else{
 		//调用service接口更新商品信息
-		itemsService.updateItems(id, itemsCustom);
+		try {
+			itemsService.updateItems(id, itemsCustom);
+		} catch (Exception e) {
+			// TODO 自動生成された catch ブロック
+			e.printStackTrace();
+		}
 		//请求重定向
-		return "redirect:queryItems.action";
+   //		return "redirect:queryItems.action";
+}
 		//转发
-//		return "forward:queryItems.action";
+	return "forward:queryItems.action";
 	}
 
 	//自定义属性编辑器

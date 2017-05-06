@@ -10,9 +10,13 @@
 
 </head>
 <body>
-	<form id="itemForm"
-		action="${pageContext.request.contextPath }/items/editItemSubmit.action"
-		method="post">
+   <!--展示后端校验的信息 的div-->
+   <div id="errorShow">
+   <c:forEach  items="${errors}"   var="error">
+     ${error.defaultMessage}<br/>
+   </c:forEach>
+   </div>
+	<form id="itemForm"  modelAttribute="ItemsCustom" action="${pageContext.request.contextPath }/items/editItemSubmit.action"  method="post">
 		<input type="hidden" name="itemId " value="${item.itemId }" /> 修改商品信息：
 		<table width="100%" border=1>
 			<thead>
@@ -20,7 +24,7 @@
 					<th width="20">商品名称</th>
 					<th width="20">商品价格</th>
 					<th width="20">商品brand</th>
-					<th width="150">项目名称</th>
+					<th width="150">商品生产日期</th>
 					<th width="60">商品简介</th>
 					<th width="60">操作</th>
 				</tr>
@@ -39,11 +43,7 @@
 					<td colspan="2" align="center"><input type="submit" value="修改" /></td>
 				</tr>
 			</tbody>
-
-
-
 		</table>
-
 	</form>
 </body>
 
