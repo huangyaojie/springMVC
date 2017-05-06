@@ -1,0 +1,19 @@
+RequestMapping  and  url  映射关系
+ModelAndView
+String（jsp逻辑名称）；
+void 通过request将结果以json的形式输出
+
+HttpServletRequest， response，session ,Model
+
+@requestParam:注解绑定简单参数类型，，不用注解时要求参数的名称和方法形参名称一致/
+date型自定义绑定。。。
+////
+
+//集合类型参数绑
+//数据回显用于参数提交错误，重新修改参数
+//String[]，List<>,Map
+//springmvc的上传图片
+//json数据的交互（提交json。相应json）
+//validation(spring mvc校验器，针对参数和异常的校验，统一的异常处理，hibernate的ORM没关系);
+//spring的restful
+//拦截器：用于权限控制
