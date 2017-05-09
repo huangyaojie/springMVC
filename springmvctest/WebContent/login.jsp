@@ -12,9 +12,10 @@
 	<div>
 		<ul>
 			<li><a href="items/queryItems.action">itemList.jsp</a></li>
-
+             <li><a href="uploader/webUploaderCropper.action">WebUploader演示 - 带裁剪功能</a></li>
 		</ul>
 	</div>
+
 	<p>中文显示是否乱码</p>
 	<p>げんこう</p>
 </body>
