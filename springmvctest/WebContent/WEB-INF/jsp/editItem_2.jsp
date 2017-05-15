@@ -10,32 +10,34 @@
 
 </head>
 <body>
-	<form id="itemForm"
-		action="${pageContext.request.contextPath }/items/editItemSubmit.action"
-		method="post">
-		<input type="hidden" name="id" value="${item.id }" /> 修改商品信息：
+	<form id="itemForm"  modelAttribute="ItemsCustom" action="${pageContext.request.contextPath }/items/editItemSubmit.action"  method="post">
+		<input type="hidden" name="itemId " value="${id}" /> 修改商品信息：
 		<table width="100%" border=1>
-			<tr>
-				<td>商品名称</td>
-				<td><input type="text" name="itemsCustom.name"
-					value="${item.name }" /></td>
-			</tr>
-			<tr>
-				<td>商品价格</td>
-				<td><input type="text" name="itemsCustom.price"
-					value="${item.price }" /></td>
-			</tr>
-			<tr>
-				<td>商品简介</td>
-				<td><textarea rows="3" cols="30" name="itemsCustom.detail">${item.detail }</textarea>
-				</td>
-			</tr>
-			<tr>
-				<td colspan="2" align="center"><input type="submit" value="提交" />
-				</td>
-			</tr>
+			<thead>
+				<tr class="text-c">
+					<th width="20">商品名称</th>
+					<th width="20">商品价格</th>
+					<th width="20">商品brand</th>
+					<th width="150">商品生产日期</th>
+					<th width="60">商品简介</th>
+					<th width="60">操作</th>
+				</tr>
+			</thead>
+			<tbody id="tab">
+				<tr>
+					<td><input type="text" name="itemName"
+						value="${ItemsCustom.itemName}" /></td>
+					<td><input type="text" name="itemPrice"
+						value="${ItemsCustom.itemPrice}" /></td>
+					<td><input type="text" name="itemBrand"
+						value="${ItemsCustom.itemBrand}" /></td>
+					<td><input type="text" name="itemCreateTime"
+						value="<fmt:formatDate value="${ItemsCustom.itemCreateTime}" pattern="yyyy-MM-dd HH:mm:ss"/>" /></td>
+					<td><textarea rows="3" cols="30" name="itemDetail">${ItemsCustom.itemDetail}</textarea></td>
+					<td colspan="2" align="center"><input type="submit" value="修改" /></td>
+				</tr>
+			</tbody>
 		</table>
-
 	</form>
 </body>
 
