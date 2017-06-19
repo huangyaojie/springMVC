@@ -13,40 +13,38 @@
 <body>
 	<div id="showDiv"></div>
 	<forms
- action="${pageContext.request.contextPath }/items/queryItem.action"
-method="post">
-		查询条件：
-		<table width="100%" border=1>
+		action="${pageContext.request.contextPath}/items/queryItemByCond.action"
+		method="post"> 查询条件：
+	<table width="100%" border=1>
+		<tr>
+			<td><input type="submit" value="条件查询" /></td>
+		<td><input id="showButton" type="button" value="动画效果" /></td>
+		</tr>
+	</table>
+	商品列表：
+	<table width="100%" border=1>
+		<tr>
+			<td>选择</td>
+			<td>商品名称</td>
+			<td>商品价格</td>
+			<td>生产日期</td>
+			<td>商品描述</td>
+			<td>操作</td>
+		</tr>
+		<c:forEach items="${itemsList }" var="item">
 			<tr>
-				<td><input type="submit" value="查询" /></td>
-				<td><input id="deleteButton"  type="button"  value="批量删除" /></td>
-				<td><input id="showButton"  type="button"   value="动画效果" /></td>
+				<td><input type="checkbox" name="delete_id"
+					value="${item.itemId}"></td>
+				<td>${item.itemName}</td>
+				<td>${item.itemPrice}</td>
+				<td><fmt:formatDate value="${item.itemCreateTime}"
+						pattern="yyyy-MM-dd HH:mm:ss" /></td>
+				<td>${item.itemDetail }</td>
+				<td><a
+					href="${pageContext.request.contextPath }/items/editItems.action?id=${item.itemId}">修改</a></td>
 			</tr>
-		</table>
-		商品列表：
-		<table width="100%" border=1>
-			<tr>
-				<td>选择</td>
-				<td>商品名称</td>
-				<td>商品价格</td>
-				<td>生产日期</td>
-				<td>商品描述</td>
-				<td>操作</td>
-			</tr>
-			<c:forEach items="${itemsList }" var="item">
-				<tr>
-					<td><input type="checkbox" name="delete_id"
-						value="${item.itemId}"></td>
-					<td>${item.itemName}</td>
-					<td>${item.itemPrice}</td>
-					<td><fmt:formatDate value="${item.itemCreateTime}"
-							pattern="yyyy-MM-dd HH:mm:ss" /></td>
-					<td>${item.itemDetail }</td>
-					<td><a
-						href="${pageContext.request.contextPath }/items/editItems.action?id=${item.itemId}">修改</a></td>
-				</tr>
-			</c:forEach>
-		</table>
+		</c:forEach>
+	</table>
 	</form>
 </body>
 <script>
@@ -60,9 +58,11 @@ method="post">
 	$("#showButton").click(function() {
 		showMessage("修改完毕", 2000);
 	});
-	$("deleteButton").click(function(){
-		window.location.href="{pageContext.request.contextPath}/items/deleteIds.action";
-	});
+	$("deleteButton")
+			.click(
+					function() {
+						window.location.href = "{pageContext.request.contextPath}/items/deleteIds.action";
+					});
 </script>
 
 </html>
