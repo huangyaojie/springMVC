@@ -31,6 +31,12 @@
 		class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
 		<!-- 2.1在webBindingInitializer中注入自定义属性编辑器、自定义转换器 -->
 		<property name="webBindingInitializer" ref="customBinder"></property>
+		<!--添加json数据的消息转换器；jackson :MappingJacksonHttpMessageConverter-->
+		<property name="messageConverters">
+		<list>
+		<bean class="" ></bean>
+		</list>
+		</property>
 	</bean>
 
 	<!-- 配置视图解析器 要求将jstl的包加到classpath -->
@@ -47,15 +53,14 @@
 	<bean id="customPropertyEditor" class="cn.itcast.ssm.controller.propertyeditor.CustomPropertyEditor"></bean>
 	<!--2.1 自定义webBinder -->
     <bean id="customBinder" class="org.springframework.web.bind.support.ConfigurableWebBindingInitializer">
-             <!-- 使用converter进行参数转  -->
-	   <property name="conversionService" ref="conversionService"/>
-          <!--      propertyEditorRegistrars用于属性编辑器 -->
-          <property name="propertyEditorRegistrars">
-	     	<list> <ref bean="customPropertyEditor" /></list>
-		 </property>
-		 <!-- 2.1.1校验器的配置 -->
-		 <property name="validator" ref="validator"/>
-		 </bean>
+          <!-- 使用converter进行参数转  -->
+	      <property name="conversionService" ref="conversionService"/>
+          <!--  2.1.0   propertyEditorRegistrars用于属性编辑器 -->
+          <property name="propertyEditorRegistrars"><list><ref bean="customPropertyEditor" /> </list></property>
+		   <!-- 2.1.1校验器的配置 -->
+		   <property name="validator" ref="validator"/>
+	</bean>
+
 	<!-- 转换器 -->
         <bean id="conversionService" class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
 		<property name="converters">
@@ -65,8 +70,6 @@
 		 </list>
 		</property>
 		</bean>
-
-
 	<!-- 2.1.1校验器 -->
 	<bean id="validator"  class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean">
 		<!-- 2.1.1.1校验器的类引入 -->
@@ -88,6 +91,4 @@
 		<!-- 对资源文件内容缓存时间，单位秒 -->
 		<property name="cacheSeconds" value="120" />
 	</bean>
-
-
 </beans>

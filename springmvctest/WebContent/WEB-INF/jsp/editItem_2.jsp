@@ -7,11 +7,20 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>修改商品信息</title>
-
 </head>
+ <!--展示后端校验的信息 的div-->
+   <div id="errorShow">
+   <c:forEach  items="${errors}"   var="error">
+     ${error.defaultMessage}<br/>
+   </c:forEach>
+   </div>
 <body>
-	<form id="itemForm"  modelAttribute="ItemsCustom" action="${pageContext.request.contextPath }/items/editItemSubmit.action"  method="post">
-		<input type="hidden" name="itemId " value="${id}" /> 修改商品信息：
+	<form id="itemForm"  action="${pageContext.request.contextPath }/items/editItemSubmit.action"  method="post">
+   <%-- 	简单数据回显	<input type="hidden" name="id"   value="${id}" /> --%>
+   <!--    pojo数据回显-->
+   <!--   下拉列表的值。将@ModelAttribute将方法的返回值填充到页面-->
+		<input type="hidden" name="itemId"   value="${ItemsCustom.itemId}" />
+		 修改商品信息：
 		<table width="100%" border=1>
 			<thead>
 				<tr class="text-c">
@@ -25,14 +34,10 @@
 			</thead>
 			<tbody id="tab">
 				<tr>
-					<td><input type="text" name="itemName"
-						value="${ItemsCustom.itemName}" /></td>
-					<td><input type="text" name="itemPrice"
-						value="${ItemsCustom.itemPrice}" /></td>
-					<td><input type="text" name="itemBrand"
-						value="${ItemsCustom.itemBrand}" /></td>
-					<td><input type="text" name="itemCreateTime"
-						value="<fmt:formatDate value="${ItemsCustom.itemCreateTime}" pattern="yyyy-MM-dd HH:mm:ss"/>" /></td>
+					<td><input type="text" name="itemName"	value="${ItemsCustom.itemName}" /></td>
+					<td><input type="text" name="itemPrice"  value="${ItemsCustom.itemPrice}" /></td>
+					<td><input type="text" name="itemBrand"  value="${ItemsCustom.itemBrand}" /></td>
+					<td><input type="text" name="itemCreateTime"  value="<fmt:formatDate value="${ItemsCustom.itemCreateTime}" pattern="yyyy-MM-dd HH:mm:ss"/>" /></td>
 					<td><textarea rows="3" cols="30" name="itemDetail">${ItemsCustom.itemDetail}</textarea></td>
 					<td colspan="2" align="center"><input type="submit" value="修改" /></td>
 				</tr>
@@ -40,5 +45,4 @@
 		</table>
 	</form>
 </body>
-
 </html>
