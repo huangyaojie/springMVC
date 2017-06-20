@@ -45,7 +45,7 @@ public class ItemsServiceImpl implements ItemsService {
 	}
 
 	@Override
-	public void updateItems(Integer id,ItemsCustom itemsCustom) throws Exception {
+	public int updateItems(Integer id,ItemsCustom itemsCustom) throws Exception {
 		//写业务代码
 
 		//对于关键业务数据的非空校验
@@ -53,9 +53,7 @@ public class ItemsServiceImpl implements ItemsService {
 			//抛出异常，提示调用接口的用户，id不能为空
 			//...
 		}
-		//itemsMapper.updateByPrimaryKey(itemsCustom);
-		itemsMapper.updateByPrimaryKeyWithBLOBs(itemsCustom);
-
+		return itemsMapper.updateByPrimaryKeyWithBLOBs(itemsCustom);
 	}
 
 }

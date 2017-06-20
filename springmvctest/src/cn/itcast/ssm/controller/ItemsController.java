@@ -41,8 +41,7 @@ import cn.itcast.ssm.service.ItemsService;
 //定义url的根路径，访问时根路径+方法的url
 @RequestMapping("/items")
 public class ItemsController {
-	private final Logger log = LoggerFactory.getLogger(ItemsController .class);
-
+	private final Logger log = LoggerFactory.getLogger(ItemsController.class);
 	//注入service
 	@Autowired
 	private ItemsService itemsService;
@@ -52,17 +51,24 @@ public class ItemsController {
 	@RequestMapping("/queryItems")
 	public ModelAndView queryItems(HttpServletRequest request) throws Exception {
      log.info("查询商品页面");
-
-		//调用service查询商品列表
+        //调用service查询商品列表
 		List<ItemsCustom> itemsList = itemsService.findItemsList(null);
-
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.addObject("itemsList", itemsList);
 		// 指定逻辑视图名
 		modelAndView.setViewName("itemsList");
 		return modelAndView;
 	}
-
+	@RequestMapping("/queryItemByCond")
+	public ModelAndView queryItemByCond(HttpServletRequest request) throws Exception {
+     log.info("查询商品页面");
+		//调用service查询商品列表
+		List<ItemsCustom> itemsList = itemsService.findItemsList(null);
+		ModelAndView modelAndView = new ModelAndView();
+		// 指定逻辑视图名
+		modelAndView.setViewName("queryItem");
+		return modelAndView;
+	}
 	//商品修改页面显示
 	//使用method=RequestMethod.GET限制使用get方法
 /*	@RequestMapping(value="/editItems",method={RequestMethod.GET})
@@ -83,18 +89,13 @@ public class ItemsController {
 	//方法返回 字符串，字符串就是逻辑视图名，Model作用是将数据填充到request域，在页面展示
 	@RequestMapping(value="/editItems",method={RequestMethod.GET})
 	public String editItems(Model model,Integer id)throws Exception{
-	     log.info("进入商品修改页面");
-
+	     log.info("/items/editItems:进入商品修改页面");
 		//调用 service查询商品信息
 		ItemsCustom itemsCustom = itemsService.findItemsById(id);
-
 		model.addAttribute("ItemsCustom", itemsCustom);
-
 		model.addAttribute("id",id);
-
+		//返回jsp的名称，经过试图解析器找到该jsp.
 		return "editItem_2";
-
-
 	}
 
 	//方法返回void
@@ -115,39 +116,42 @@ public class ItemsController {
 //
 //	}
 
-	@RequestMapping("/deleteIds")
-	public  ModelAndView deleteIds(Integer[] delete_id) throws Exception{
+	@RequestMapping("/deleteItems")
+	public  ModelAndView deleteIds(Integer[] ids) throws Exception{
+        log.info("deleteItems:批量删除商品信息");
 		ModelAndView mv = new ModelAndView();
-		mv.addObject("message","删除成功");
+	   mv.addObject("message","删除成功");
 		mv.setViewName("success");
 		return mv;
 	}
 	//商品修改提交
-//	itemsQueryVo是包装类型的pojo
+    //itemsQueryVo是包装类型的pojo
 	@RequestMapping("/editItemSubmit")
 	public String editItemSubmit(Model model,Integer id,@Validated @ModelAttribute(value="ItemsCustom")ItemsCustom itemsCustom,BindingResult bindingResult)throws Exception{
     if(bindingResult.hasErrors()){
-	     log.info("商品修改提交");
-
+	 log.info("商品修改后发现错误，显示错误的提示信息,并进行数据回显");
 	List<ObjectError> allErrors = bindingResult.getAllErrors();
 	model.addAttribute("errors",allErrors);
 	model.addAttribute("id",id);
 	model.addAttribute("ItemsCustom",itemsCustom);
-	return "editItem";
+	log.info("商品修改后提发现错误");
+	return "editItem_2";
    }else{
-		//调用service接口更新商品信息
-		try {
-			itemsService.updateItems(id, itemsCustom);
-		} catch (Exception e) {
-			// TODO 自動生成された catch ブロック
-			e.printStackTrace();
-		}
+	      log.info("商品修改后未发现错误，进行更新操作后，返回查询页面");
+		   //调用service接口更新商品信息。得到执行结果的返回值。
+	       int i =itemsService.updateItems(itemsCustom.getItemId(),itemsCustom);
+	     /*  if(i==1){
+	       //返回值为1，更新成功.
+	       }else{
+	    	//
+	       }*/
 		//请求重定向
-   //		return "redirect:queryItems.action";
+        // return "redirect:queryItems.action";
+	    //转发
+	   	return "forward:queryItems.action";
+     }
 }
-		//转发
-	return "forward:queryItems.action";
-	}
+
 
 	//自定义属性编辑器
 //	@InitBinder

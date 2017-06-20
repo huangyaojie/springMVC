@@ -32,6 +32,6 @@ public interface ItemsService {
 	 * @param itemsCustom 修改商品的信息
 	 * @throws Exception
 	 */
-	public void updateItems(Integer id,ItemsCustom itemsCustom)throws Exception;
+	public int  updateItems(Integer id,ItemsCustom itemsCustom)throws Exception;
 
 }
