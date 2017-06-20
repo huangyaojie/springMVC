@@ -17,9 +17,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import cn.itcast.ssm.exception.CustomException;
 import cn.itcast.ssm.po.ItemsCustom;
 import cn.itcast.ssm.po.ItemsQueryVo;
 import cn.itcast.ssm.service.ItemsService;
+import cn.itcast.ssm.validategroup.ValidateGroup2;
 /**
  *
  * <p>
@@ -124,9 +126,13 @@ public class ItemsController {
 	}
 	//商品修改提交
     //itemsQueryVo是包装类型的pojo
+	//@Validated(value={ValidateGroup2.class})，规定使用哪一组校验规则。
 	@RequestMapping("/editItemSubmit")
-	public String editItemSubmit(Model model,Integer id,@Validated @ModelAttribute(value="ItemsCustom")ItemsCustom itemsCustom,BindingResult bindingResult)throws Exception{
-    if(bindingResult.hasErrors()){
+	public String editItemSubmit(Model model,Integer id,@Validated(value={ValidateGroup2.class}) @ModelAttribute(value="ItemsCustom")ItemsCustom itemsCustom,BindingResult bindingResult) throws Exception{
+      if(itemsCustom.getItemCreateTime()==null){
+	        throw new CustomException("生产日期为null异常");
+      }
+		if(bindingResult.hasErrors()){
 	 log.info("商品修改后发现错误，显示错误的提示信息,并进行数据回显");
 	List<ObjectError> allErrors = bindingResult.getAllErrors();
 	model.addAttribute("errors",allErrors);

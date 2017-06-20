@@ -17,9 +17,9 @@
 			<li><a href="items/queryItems.action">itemList.jsp</a></li>
              <li><a href="uploader/webUploaderCropper.action">WebUploader演示 - 带裁剪功能</a></li>
              <li>  <button id="btn1">测试多个click事件的执行顺序</button></li>
+             <li><a href="json/toJsonTest.action">jsonTest.jsp</a></li>
 		</ul>
 	</div>
-
 	<p>中文显示是否乱码</p>
 	<p>げんこう</p>
 </body>

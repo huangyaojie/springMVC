@@ -31,10 +31,10 @@
 		class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
 		<!-- 2.1在webBindingInitializer中注入自定义属性编辑器、自定义转换器 -->
 		<property name="webBindingInitializer" ref="customBinder"></property>
-		<!--添加json数据的消息转换器；jackson :MappingJacksonHttpMessageConverter-->
+		<!--2.2添加json数据的消息转换器；jackson :MappingJacksonHttpMessageConverter。让处理器适配器支持json数据的解析-->
 		<property name="messageConverters">
 		<list>
-		<bean class="" ></bean>
+		<bean class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter" ></bean>
 		</list>
 		</property>
 	</bean>
@@ -46,8 +46,8 @@
 		<property name="prefix" value="/WEB-INF/jsp/" />
 		<property name="suffix" value=".jsp" />
 	</bean>
-
-
+	<!--统一异常处理器配置  -->
+     <bean class="cn.itcast.ssm.exception.CustomExceptionResolver"></bean>
 
 	<!-- 注册属性编辑器 -->
 	<bean id="customPropertyEditor" class="cn.itcast.ssm.controller.propertyeditor.CustomPropertyEditor"></bean>
