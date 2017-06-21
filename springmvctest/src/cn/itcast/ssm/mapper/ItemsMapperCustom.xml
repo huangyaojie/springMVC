@@ -30,4 +30,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			<include refid="query_items_where" />
 		</where>
 	</select>
+	<insert id="addItem" parameterType="cn.itcast.ssm.po.ItemsCustom" >
+	insert into items(
+	item_name,
+	item_price,item_brand,
+	item_create_time,item_detail
+	) values(
+    #{itemName,jdbcType=VARCHAR},
+    #{itemPrice,jdbcType=FLOAT},
+    #{itemBrand,jdbcType=VARCHAR},
+    #{itemCreateTime,jdbcType=DATE},
+    #{itemDetail,jdbcType=VARCHAR}
+	)
+	</insert>
 </mapper>

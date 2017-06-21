@@ -12,20 +12,14 @@
 		http://www.springframework.org/schema/aop/spring-aop-3.2.xsd
 		http://www.springframework.org/schema/tx
 		http://www.springframework.org/schema/tx/spring-tx-3.2.xsd ">
-
-
 	<!-- 使用spring组件扫描 -->
 	<context:component-scan base-package="cn.itcast.ssm.controller" />
-
 	<!-- 通过annotation-driven可以替代下边的处理器映射器和适配器 -->
 	<!-- <mvc:annotation-driven conversion-service="conversionService"> </mvc:annotation-driven> -->
-
 	<!-- 注解处理器映射器 -->
 	<bean
 		class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping">
 	</bean>
-
-
 	<!-- 2注解适配器 -->
 	<bean
 		class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
@@ -48,7 +42,12 @@
 	</bean>
 	<!--统一异常处理器配置  -->
      <bean class="cn.itcast.ssm.exception.CustomExceptionResolver"></bean>
-
+     <!-- 图片上传解析器-->
+     <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+         <property name="maxUploadSize">
+               <value>5242880</value>
+         </property>
+     </bean>
 	<!-- 注册属性编辑器 -->
 	<bean id="customPropertyEditor" class="cn.itcast.ssm.controller.propertyeditor.CustomPropertyEditor"></bean>
 	<!--2.1 自定义webBinder -->

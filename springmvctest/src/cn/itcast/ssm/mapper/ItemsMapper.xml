@@ -72,11 +72,14 @@
 	<!-- <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
 		delete from items where id = #{id,jdbcType=INTEGER} </delete> <delete id="deleteByExample"
 		parameterType="cn.itcast.ssm.po.ItemsExample" > delete from items <if test="_parameter
-		!= null" > <include refid="Example_Where_Clause" /> </if> </delete> <insert
+		!= null" > <include refid="Example_Where_Clause" /> </if> </delete>
+		 <insert
 		id="insert" parameterType="cn.itcast.ssm.po.Items" > insert into items (id,
 		name, price, pic, createtime, detail ) values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR},
 		#{price,jdbcType=REAL}, #{pic,jdbcType=VARCHAR}, #{createtime,jdbcType=TIMESTAMP},
-		#{detail,jdbcType=LONGVARCHAR} ) </insert> <insert id="insertSelective" parameterType="cn.itcast.ssm.po.Items"
+		#{detail,jdbcType=LONGVARCHAR} ) </insert>
+
+		 <insert id="insertSelective" parameterType="cn.itcast.ssm.po.Items"
 		> insert into items <trim prefix="(" suffix=")" suffixOverrides="," > <if
 		test="id != null" > id, </if> <if test="name != null" > name, </if> <if test="price
 		!= null" > price, </if> <if test="pic != null" > pic, </if> <if test="createtime

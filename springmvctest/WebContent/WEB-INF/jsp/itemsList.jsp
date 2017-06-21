@@ -12,39 +12,45 @@
 </head>
 <body>
 	<div id="showDiv"></div>
-	<form  name="itemsForm"  action="${pageContext.request.contextPath}/items/queryItemByCond.action"  method="post">
-	 查询条件：
-	<table width="100%" border=1>
-		<tr>
-		<td><input type="submit" value="条件查询" /></td>
-		<td><input id="showButton" type="button" value="动画效果" /></td>
-		</tr>
-	</table>
-	<div>
-	<input id="delete_items" type="button" value="删除" />
-    <input id="update_items" type="button" value="批量更新" />
-	</div>
-	商品列表：
-	<table width="100%" border=1>
-		<tr>
-			<td>选择</td>
-			<td>商品名称</td>
-			<td>商品价格</td>
-			<td>生产日期</td>
-			<td>商品描述</td>
-			<td>操作</td>
-		</tr>
-		<c:forEach items="${itemsList }" var="item">
+	<form name="itemsForm"
+		action="${pageContext.request.contextPath}/items/queryItemByCond.action"
+		method="post">
+		查询条件：
+		<table width="100%" border=1>
 			<tr>
-				<td><input type="checkbox" name="delete_id"  value="${item.itemId}"></td>
-				<td>${item.itemName}</td>
-				<td>${item.itemPrice}</td>
-				<td><fmt:formatDate value="${item.itemCreateTime}"  pattern="yyyy-MM-dd HH:mm:ss" /></td>
-				<td>${item.itemDetail }</td>
-				<td><a href="${pageContext.request.contextPath }/items/editItems.action?id=${item.itemId}">修改</a></td>
+				<td><input type="submit" value="条件查询" /></td>
+				<td><input id="showButton" type="button" value="动画效果" /></td>
 			</tr>
-		</c:forEach>
-	</table>
+		</table>
+		<div>
+			<input id="delete_items" type="button" value="删除" />
+			 <input  id="update_items" type="button" value="批量更新" />
+			  <input  id="add_items" type="button" value="新增商品" />
+		</div>
+		商品列表：
+		<table width="100%" border=1>
+			<tr>
+				<td>选择</td>
+				<td>商品名称</td>
+				<td>商品价格</td>
+				<td>生产日期</td>
+				<td>商品描述</td>
+				<td>操作</td>
+			</tr>
+			<c:forEach items="${itemsList }" var="item">
+				<tr>
+					<td><input type="checkbox" name="delete_id"
+						value="${item.itemId}"></td>
+					<td>${item.itemName}</td>
+					<td>${item.itemPrice}</td>
+					<td><fmt:formatDate value="${item.itemCreateTime}"
+							pattern="yyyy-MM-dd HH:mm:ss" /></td>
+					<td>${item.itemDetail }</td>
+					<td><a
+						href="${pageContext.request.contextPath }/items/editItems.action?id=${item.itemId}">修改</a></td>
+				</tr>
+			</c:forEach>
+		</table>
 	</form>
 </body>
 <script>
@@ -70,6 +76,9 @@
 	 $("#update_items").click(function(){
 		 document.itemsForm.action="${pageContext.request.contextPath}/items/queryItemsToBatchUpdate.action";
 		 document.itemsForm.submit();
+		 });
+	 $("#add_items").click(function(){
+			window.location.href = "${pageContext.request.contextPath}/items/addItems.action";
 		 });
 </script>
 

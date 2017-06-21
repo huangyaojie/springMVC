@@ -26,7 +26,6 @@ public class ItemsServiceImpl implements ItemsService {
 	@Override
 	public List<ItemsCustom> findItemsList(ItemsQueryVo itemsQueryVo)
 			throws Exception {
-
 		return itemsMapperCustom.findItemsList(itemsQueryVo);
 	}
 
@@ -54,6 +53,11 @@ public class ItemsServiceImpl implements ItemsService {
 			//...
 		}
 		return itemsMapper.updateByPrimaryKeyWithBLOBs(itemsCustom);
+	}
+	@Override
+	public int addItem(ItemsCustom itemsCustom) throws Exception {
+		// TODO 自動生成されたメソッド・スタブ
+		return itemsMapperCustom.addItem(itemsCustom);
 	}
 
 }

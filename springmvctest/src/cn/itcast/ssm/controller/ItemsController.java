@@ -1,6 +1,8 @@
 package cn.itcast.ssm.controller;
 
+import java.io.File;
 import java.util.List;
+import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -15,6 +17,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import cn.itcast.ssm.exception.CustomException;
@@ -61,9 +64,44 @@ public class ItemsController {
 		modelAndView.setViewName("itemsList");
 		return modelAndView;
 	}
+	@RequestMapping("/addItems")
+	public ModelAndView addItems(HttpServletRequest request) throws Exception {
+        log.info("增加商品页面");
+		ModelAndView modelAndView = new ModelAndView();
+		// 指定逻辑视图名
+		modelAndView.setViewName("addItems");
+		return modelAndView;
+	}
+	@RequestMapping("/addItemsSubmit")
+	public String  addItemsSubmit(Model model,MultipartFile itemPictureFile ,@ModelAttribute(value="itemsCustom") ItemsCustom itemsCustom) throws Exception {
+        log.info("增加商品提交（包括图片和商品信息）");
+        if(null!=itemPictureFile){
+    	   //变为双羊角号
+    	   String  filePath = "D:\\virtualPics";
+    	   String originalFilename = itemPictureFile.getOriginalFilename();
+    	   String  newFilename= UUID.randomUUID()+originalFilename.substring(originalFilename.lastIndexOf("."));
+    	    //存储到图片服务器的位置
+    	   File file  =new  File(filePath+"\\"+newFilename);
+    	   itemPictureFile.transferTo(file);
+    	   itemsCustom.setItemBrand(newFilename);
+    	   System.out.println("name"+itemsCustom.getItemName());
+    	   System.out.println("price"+itemsCustom.getItemPrice());
+    	   System.out.println("createtime"+itemsCustom.getItemCreateTime());
+    	   System.out.println("detail"+itemsCustom.getItemDetail());
+    	   System.out.println("brand"+itemsCustom.getItemBrand());
+
+       }
+        int n = itemsService.addItem(itemsCustom);
+        System.out.println("ss"+n);
+         if(n<=0){
+	                throw new CustomException("添加失败");
+           }else{
+	                return "success";
+           }
+	}
 	@RequestMapping("/queryItemByCond")
 	public ModelAndView queryItemByCond(HttpServletRequest request) throws Exception {
-         log.info("查询商品页面");
+        log.info("查询商品页面");
 		//调用service查询商品列表
 		List<ItemsCustom> itemsList = itemsService.findItemsList(null);
 		ModelAndView modelAndView = new ModelAndView();
