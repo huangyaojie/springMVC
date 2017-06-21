@@ -18,6 +18,7 @@
              <li><a href="uploader/webUploaderCropper.action">WebUploader演示 - 带裁剪功能</a></li>
              <li>  <button id="btn1">测试多个click事件的执行顺序</button></li>
              <li><a href="json/toJsonTest.action">jsonTest.jsp</a></li>
+              <li>  <input type="text" id="btn3"></li>
 		</ul>
 	</div>
 	<p>中文显示是否乱码</p>
@@ -51,6 +52,29 @@ var flag=0;
 				alert("事件4");
 				}
 			});
+			function m1(){
+				alert("单击事件");
+			}
+			function m2(){
+				alert("双击事件");
+			};
+			//定义setTimeout执行方法
+			var TimeFn = null;
+			$('#btn3').click(function () {
+				// 取消上次延时未执行的方法
+				clearTimeout(TimeFn);
+				//执行延时
+				TimeFn = setTimeout(function(){
+					//do function在此处写单击事件要执行的代码
+					m1();
+					},3000);
+				});
+			$('#btn3').dblclick(function () {
+						// 取消上次延时未执行的方法
+						clearTimeout(TimeFn);
+						//双击事件的执行代码
+						m2();
+						});
 </script>
 
 </html>
