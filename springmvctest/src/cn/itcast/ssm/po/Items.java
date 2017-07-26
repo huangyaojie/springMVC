@@ -11,7 +11,7 @@ import cn.itcast.ssm.validategroup.ValidateGroup2;
 public class Items {
     private Integer itemId;
 
-   @Size(min=1,max=30,message="{items.name.length.error}",groups={ValidateGroup1.class,ValidateGroup2.class})
+   @Size(min=1,max=30,message="{items.name.length.error}",groups={ValidateGroup2.class})
     private String itemName;
 
     private Float itemPrice;

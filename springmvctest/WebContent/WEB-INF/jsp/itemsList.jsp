@@ -36,6 +36,7 @@
 				<td>生产日期</td>
 				<td>商品描述</td>
 				<td>操作</td>
+				<td>restful连接</td>
 			</tr>
 			<c:forEach items="${itemsList }" var="item">
 				<tr>
@@ -46,8 +47,8 @@
 					<td><fmt:formatDate value="${item.itemCreateTime}"
 							pattern="yyyy-MM-dd HH:mm:ss" /></td>
 					<td>${item.itemDetail }</td>
-					<td><a
-						href="${pageContext.request.contextPath }/items/editItems.action?id=${item.itemId}">修改</a></td>
+					<td><a  href="${pageContext.request.contextPath }/items/editItems.action?id=${item.itemId}">修改</a></td>
+                   	<td><a  href="${pageContext.request.contextPath }/items/restfulTest/${item.itemId}">restful展示json</a></td>
 				</tr>
 			</c:forEach>
 		</table>
