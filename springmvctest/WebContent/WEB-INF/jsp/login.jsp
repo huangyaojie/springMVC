@@ -27,6 +27,8 @@
 	</div>
 	<p>中文显示是否乱码</p>
 	<p>げんこう</p>
+    <p><button id="btn5" type="button">测试文件 上传 </button></p>
+	
 </body>
 <script>
 var groupsName="全体技能组";
@@ -79,6 +81,9 @@ var flag=0;
 						//双击事件的执行代码
 						m2();
 						});
+			$("#btn5").click(function(){
+				window.location.href = "${pageContext.request.contextPath}/file/fileup";
+			 });
 </script>
 
 </html>
